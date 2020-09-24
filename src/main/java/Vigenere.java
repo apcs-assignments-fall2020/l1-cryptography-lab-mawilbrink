@@ -2,13 +2,75 @@ import java.util.Scanner;
 
 public class Vigenere {
     public static String encryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        String encryptedM = "";
+        int stringLength = message.length();
+        int keyLength = key.length();
+        int k = 0;
+        char newChar = 'a';
+
+        for(int i = 0; i < stringLength; i++){
+            char indexedChar = message.charAt(i);
+            char keyChar = key.charAt(k);
+            int keyInt = keyChar - 'A';
+
+            if ((indexedChar <= 'Z') && (indexedChar >= 'A')){
+                newChar = (char)(indexedChar + keyInt);
+                if (newChar > 'Z'){
+                    newChar = (char)(newChar - 26);
+                }
+                k += 1;
+            }else if ((indexedChar <= 'z') && (indexedChar >= 'a')){
+                newChar = (char)(indexedChar + keyInt);
+                if (newChar > 'z'){
+                    newChar = (char)(newChar - 26);
+                }
+                k += 1;
+            }else{
+                newChar = indexedChar;
+            }
+            encryptedM += newChar;
+            if (k == keyLength){
+                k = 0;
+            }
+            
+        }
+        return encryptedM;
     }
 
     public static String decryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        String decryptedM = "";
+        int stringLength = message.length();
+        int keyLength = key.length();
+        int k = 0;
+        char newChar = 'a';
+
+        for(int i = 0; i < stringLength; i++){
+            char indexedChar = message.charAt(i);
+            char keyChar = key.charAt(k);
+            int keyInt = keyChar - 'A';
+
+            if ((indexedChar <= 'Z') && (indexedChar >= 'A')){
+                newChar = (char)(indexedChar - keyInt);
+                if (newChar < 'A'){
+                    newChar = (char)(newChar + 26);
+                }
+                k += 1;
+            }else if ((indexedChar <= 'z') && (indexedChar >= 'a')){
+                newChar = (char)(indexedChar - keyInt);
+                if (newChar < 'a'){
+                    newChar = (char)(newChar + 26);
+                }
+                k += 1;
+            }else{
+                newChar = indexedChar;
+            }
+            decryptedM += newChar;
+            if (k == keyLength){
+                k = 0;
+            }
+            
+        }
+        return decryptedM;
     }
 
 
